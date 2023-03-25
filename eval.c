@@ -80,6 +80,12 @@ void run(data_t *arg)
 		{"pint", pint},
 		{"pop", pop},
 		{"swap", swap},
+		{"add", _add},
+		{"nop", _nop},
+		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
+		{"mod", _mod},
 		{"stack", stack_mode},
 		{"queue", queue_mode},
 		{NULL, NULL}
@@ -97,4 +103,14 @@ void run(data_t *arg)
 
 	dprintf(2, "L%d: unknown instruction %s\n", arg->line_number, arg->op);
 	exit(EXIT_FAILURE);
+}
+/**
+ * _nop - does nothing
+ * @arg: points to data_t struct
+ */
+void _nop(data_t *arg)
+{
+	(void)arg;
+
+	return;
 }

@@ -54,20 +54,28 @@ typedef struct data_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(data_t *arg);
+	void (*f)(data_t *);
 } instruction_t;
 
 
-void free_list(stack_t *head);
-void eval(char *line, stack_t **h, stack_t **t, int *mode, unsigned int ln);
-int parse(char *line, data_t *arg);
-void run(data_t *arg);
-void push(data_t *arg);
-void pall(data_t *arg);
-void pint(data_t *arg);
-void pop(data_t *arg);
-void swap(data_t *arg);
-void stack_mode(data_t *arg);
-void queue_mode(data_t *arg);
+void free_list(stack_t *);
+void eval(char *, stack_t **, stack_t **, int *, unsigned int);
+int parse(char *, data_t *);
+void run(data_t *);
+
+/* opcode instruction */
+void push(data_t *);
+void pall(data_t *);
+void pint(data_t *);
+void pop(data_t *);
+void swap(data_t *);
+void _add(data_t *);
+void _nop(data_t *);
+void _sub(data_t *);
+void _div(data_t *);
+void _mul(data_t *);
+void _mod(data_t *);
+void stack_mode(data_t *);
+void queue_mode(data_t *);
 
 #endif /* __MONTY__ */
