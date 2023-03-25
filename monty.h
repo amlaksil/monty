@@ -66,6 +66,7 @@ void push(data_t *arg);
 void pall(data_t *arg);
 void pint(data_t *arg);
 void pop(data_t *arg);
+void swap(data_t *arg);
 void stack_mode(data_t *arg);
 void queue_mode(data_t *arg);
 

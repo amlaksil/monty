@@ -83,7 +83,8 @@ void pop(data_t *arg)
 	}
 	current = *h;
 	*h = (*h)->next;
-	(*h)->prev = NULL;
+	if (*h != NULL)
+		(*h)->prev = NULL;
 	free(current);
 }
 /**
@@ -100,4 +101,29 @@ void pint(data_t *arg)
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", h->n);
+}
+/**
+ * swap - swaps the top two elements of the stack
+ * @arg: points to arguments in data_t struct
+ */
+void swap(data_t *arg)
+{
+	stack_t **h = arg->head;
+	stack_t *tmp;
+	int fnum, snum;
+
+	if (*h == NULL || h == NULL || (*h)->next == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n",
+			arg->line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = *h;
+	fnum = (*h)->n;
+	*h = (*h)->next;
+	snum = (*h)->n;
+	(*h)->n = fnum;
+	*h = tmp;
+	(*h)->n = snum;
 }

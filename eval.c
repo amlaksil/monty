@@ -79,6 +79,7 @@ void run(data_t *arg)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"swap", swap},
 		{"stack", stack_mode},
 		{"queue", queue_mode},
 		{NULL, NULL}
