@@ -64,7 +64,7 @@ void parse_line(char *buf, unsigned int line_number)
 		return; /* return (nop) */
 	/*if (strcmp(opcode, "\n") == 0)
 		return;*/
-	printf("opcode = %s, value = %s\n", opcode, value);
+	/*printf("opcode = %s, value = %s\n", opcode, value);*/
 	find_right_func(opcode, value, line_number);
 }
 /**
