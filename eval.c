@@ -111,6 +111,4 @@ void run(data_t *arg)
 void _nop(data_t *arg)
 {
 	(void)arg;
-
-	return;
 }

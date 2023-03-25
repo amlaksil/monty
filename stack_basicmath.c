@@ -22,7 +22,8 @@ void _add(data_t *arg)
 	*h = (*h)->next;
 	snum = (*h)->n;
 	(*h)->n = snum + fnum;
-	*h = tmp;
+	(*h)->prev = NULL;
+	free(tmp);
 }
 /**
  * _sub - subtracts the top element of the stack from the second
