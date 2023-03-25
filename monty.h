@@ -24,7 +24,24 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-extern stack_t *head;
+/**
+ * struct data_s - a struct contails all the neccessary data
+ * @op: given opcode
+ * @value: value to be inserted to the list
+ * @mode: mode of operation stack or queue
+ * @line_number: line number in the file at which operation being performed
+ * @head: points to the first element on the list
+ * @tail: points to the last element of the list
+ */
+typedef struct data_s
+{
+	char *op;
+	int value;
+	int *mode;
+	unsigned int line_number;
+	stack_t **head;
+	stack_t **tail;
+} data_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -37,20 +54,19 @@ extern stack_t *head;
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(data_t *arg);
 } instruction_t;
 
 
-typedef void (*op_func)(stack_t **, unsigned int);
-
-void free_list(void);
-stack_t *create_list(int c);
-void open_file(char *file_name);
-void parse_line(char *buf, unsigned int line_number);
-void read_file(FILE *file_name);
-void push_to_stack(stack_t **new, unsigned int ln);
-void print_element(stack_t **head, unsigned int ln);
-void check_opcode(op_func f, char *op, char *val, unsigned int ln);
-void find_right_func(char *opcode, char *val, unsigned int ln);
+void free_list(stack_t *head);
+void eval(char *line, stack_t **h, stack_t **t, int *mode, unsigned int ln);
+int parse(char *line, data_t *arg);
+void run(data_t *arg);
+void push(data_t *arg);
+void pall(data_t *arg);
+void pint(data_t *arg);
+void pop(data_t *arg);
+void stack_mode(data_t *arg);
+void queue_mode(data_t *arg);
 
 #endif /* __MONTY__ */
