@@ -1,5 +1,5 @@
 #include "monty.h"
-stack_t *head = NULL;
+
 
 /**
  * main - checks the code
@@ -10,22 +10,43 @@ stack_t *head = NULL;
  */
 int main(int ac, char **argv)
 {
+	FILE *fd;
+	char *line = NULL;
+	size_t len = 0;
+	stack_t *head = NULL;
+	stack_t *tail = NULL;
+	int mode = 0;
+	unsigned int line_number = 1;
 
 	if (ac != 2)
 	{
 		dprintf(2, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	open_file(argv[1]);
-	free_list();
+	fd = fopen(argv[1], "r");
+	if (!fd)
+	{
+		dprintf(2, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+
+	while (getline(&line, &len, fd) != EOF)
+	{
+		eval(line, &head, &tail, &mode, line_number);
+		line_number++;
+	}
+	fclose(fd);
+	free(line);
+	free_list(head);
 
 	return (0);
 }
 /**
  * free_list - free stack_t list
+ * @head: points to the first element in the list
  *
  */
-void free_list(void)
+void free_list(stack_t *head)
 {
 	stack_t *tmp;
 
@@ -36,25 +57,23 @@ void free_list(void)
 		free(tmp);
 	}
 }
+
 /**
- * create_list - creates new list
- * @c: number to be inserted to list
+ * stack_mode - change to stack LIEO format
  *
- * Return: the address of the new list
+ * @args: arguments to be passed
  */
-stack_t *create_list(int c)
+void stack_mode(data_t *args)
 {
-	stack_t *new;
+	*args->mode = 0;
+}
+/**
+ * queue_mode - change to queue FIFO format
+ *
+ * @args: arguments to be passed
+ */
 
-	new = malloc(sizeof(stack_t));
-	if (!new)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	new->n = c;
-	new->next = NULL;
-	new->prev = NULL;
-
-	return (new);
+void queue_mode(data_t *args)
+{
+	*args->mode = 1;
 }
