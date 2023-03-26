@@ -86,6 +86,10 @@ void run(data_t *arg)
 		{"div", _div},
 		{"mul", _mul},
 		{"mod", _mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{"stack", stack_mode},
 		{"queue", queue_mode},
 		{NULL, NULL}
