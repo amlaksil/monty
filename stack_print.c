@@ -10,14 +10,14 @@
 void pchar(data_t *arg)
 {
 	stack_t *h = *arg->head;
-	int n = h->n;
+	int n;
 
 	if (h == NULL)
 	{
 		dprintf(2, "L%d: can't pchar, stack empty\n", arg->line_number);
 		exit(EXIT_FAILURE);
 	}
-
+	n = h->n;
 	if (n >= 0 && n < 127)
 		printf("%c\n", n);
 	else
