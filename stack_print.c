@@ -42,7 +42,7 @@ void pstr(data_t *arg)
 	while (h)
 	{
 		if (h->n < 0 || h->n > 127 || h->n == 0)
-			return;
+			break;
 		printf("%c", h->n);
 		h = h->next;
 	}
@@ -61,6 +61,8 @@ void rotl(data_t *arg)
 	stack_t *tmp = *h;
 	stack_t *top_node;
 
+	if (*h == NULL)
+		return;
 	if (tmp->next != NULL)
 	{
 		top_node = tmp; /* store the address of the first node */
@@ -86,6 +88,8 @@ void rotr(data_t *arg)
 	stack_t *tmp = *h;
 	stack_t *bottom_node;
 
+	if (*h == NULL)
+		return;
 	if (tmp->next != NULL)
 	{
 		while (tmp->next->next != NULL)
